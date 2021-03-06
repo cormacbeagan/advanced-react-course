@@ -1,7 +1,10 @@
 import { gql, useQuery } from '@apollo/client';
 import Head from 'next/head';
 import styled from 'styled-components';
+import formatMoney from '../lib/money';
+import AddToCart from './AddToCart';
 import DisplayError from './ErrorMessage';
+import SignInCheck from './SignInCheck';
 
 const ProductStyles = styled.div`
   display: grid;
@@ -13,6 +16,16 @@ const ProductStyles = styled.div`
   img {
     width: 100%;
     object-fit: contain;
+  }
+  button {
+    background: inherit;
+    border: 1px solid var(--lightGray);
+    padding: 1rem 2rem;
+    cursor: pointer;
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -53,6 +66,10 @@ export default function SingleProduct({ id }) {
       <div className="details">
         <h2>{Product.name}</h2>
         <p>{Product.description}</p>
+        <p>{formatMoney(Product.price)}</p>
+        <SignInCheck>
+          <AddToCart id={Product.id} />
+        </SignInCheck>
       </div>
     </ProductStyles>
   );

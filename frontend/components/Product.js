@@ -6,8 +6,11 @@ import PriceTag from './styles/PriceTag';
 import formatMoney from '../lib/money';
 import DeleteProduct from './DeleteProduct';
 import AddToCart from './AddToCart';
+import SignInCheck from './SignInCheck';
+import { useUser } from './User';
 
 export default function Product({ product }) {
+  const me = useUser();
   return (
     <ItemStyles>
       <img
@@ -20,18 +23,27 @@ export default function Product({ product }) {
       <PriceTag>{formatMoney(product.price)}</PriceTag>
       <p>{product.description}</p>
       <div className="buttonList">
-        <Link
-          href={{
-            pathname: '/update',
-            query: {
-              id: product.id,
-            },
-          }}
-        >
-          Edit
-        </Link>
-        <AddToCart id={product.id} />
-        <DeleteProduct id={product.id}>Delete</DeleteProduct>
+        <SignInCheck>
+          <Link
+            href={{
+              pathname: '/update',
+              query: {
+                id: product.id,
+              },
+            }}
+          >
+            Edit
+          </Link>
+        </SignInCheck>
+
+        {me ? (
+          <AddToCart id={product.id} />
+        ) : (
+          <Link href="/signin">Please Sign In To Buy</Link>
+        )}
+        <SignInCheck>
+          <DeleteProduct id={product.id}>Delete</DeleteProduct>
+        </SignInCheck>
       </div>
     </ItemStyles>
   );

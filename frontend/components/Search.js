@@ -86,6 +86,9 @@ export default function Search() {
               {...getItemProps({ item })}
               key={item.id}
               highlighted={index === highlightedIndex}
+              onClick={() => {
+                router.push(`/product/${item.id}`);
+              }}
             >
               <img
                 width="50"
