@@ -1,0 +1,10 @@
+backend/.env
+backend/.keystone/admin/.next
+backend/.vscode
+backend/node_modules
+
+
+frontend/.env.local
+frontend/.next
+frontend/.vscode
+frontend/node_modules
