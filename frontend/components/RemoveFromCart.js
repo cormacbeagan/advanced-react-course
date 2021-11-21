@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { CURRENT_USER_QUERY } from './User';
 
 const BigButton = styled.button`
   font-size: 3rem;
