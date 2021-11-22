@@ -4,7 +4,7 @@ import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import Form from './styles/Form';
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($email: String!, $name: String, $password: String!) {
     createUser(data: { email: $email, name: $name, password: $password }) {
       id
@@ -27,7 +27,9 @@ export default function SignUp() {
   });
   async function handleSubmit(e) {
     e.preventDefault();
-    await signup().catch(console.error);
+    const res = await signup().catch(console.error);
+    console.log(res);
+    console.log(data, loading, error);
     resetForm();
   }
 
@@ -69,7 +71,7 @@ export default function SignUp() {
           <input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             autoComplete="password"
             value={inputs.password}
             onChange={handleChange}
